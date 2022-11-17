@@ -1,0 +1,24 @@
+{
+    "name": "wikipedia_wrapper",
+    "version": "1.0.0",
+    "description": "A node server wrapping the Wikimedia REST API v2",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "./node_modules/jasmine/bin/jasmine.js --config=./jasmine.json",
+        "start": "node -e 'import(\"./bin/server.mjs\").then((a) => a.Server.start());'",
+        "start-dev": "nodemon --exec 'npm run start'"
+    },
+    "author": "Anne Cypcar",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.27.2",
+        "cors": "^2.8.5",
+        "express": "^4.18.1"
+    },
+    "devDependencies": {
+        "jasmine": "^4.5.0",
+        "nodemon": "^2.0.20",
+        "supertest": "^6.3.1"
+    }
+}
