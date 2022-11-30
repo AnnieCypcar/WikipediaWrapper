@@ -19,16 +19,16 @@ describe('articles', () => {
                 .expect(200)
                 .then((response) => {
                     const results = response.body;
-                    expect(results.length).toEqual(1000)
+                    expect(results.length).toEqual(2428)
                     expect(results[0]).toEqual({
                         'article': 'Main_Page',
-                        'views': 18704051,
+                        'views': 129862199,
                         'rank': 1
                     });
                     expect(results[results.length - 1]).toEqual({
-                        'article': 'Yolanda_Foster',
-                        'views': 8258,
-                        'rank': 1000
+                        'article': 'Ang_Probinsyano',
+                        'views': 8247,
+                        'rank': 2428
                     });
                 });
         });

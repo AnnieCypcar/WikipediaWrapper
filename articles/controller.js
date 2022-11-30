@@ -24,26 +24,27 @@ export const ArticlesController = {
         }
 
         const articleSums = {};
-        for await (const url of urls) {
-            try {
+        try {
+            for await (const url of urls) {
                 const { data } = await Retry.getURL(url);
                 const articles = data?.items[0]?.articles;
-                for (const article of articles) {
+                for (const a of articles) {
+                    const { article, views } = a;
                     if (!(article in articleSums)) {
-                        articleSums[article.article] = {
-                            article: article.article,
-                            views: article.views
+                        articleSums[article] = {
+                            article,
+                            views
                         };
                     } else {
-                        articleSums[article.article]['views'] += article.views;
+                        articleSums[article]['views'] += views;
                     }
                 }
-                const sortedByViews = Object.entries(articleSums).sort(ArticlesService.sortArticles);
-                const sortedWithRank = ArticlesService.addRank(sortedByViews);
-                return res.status(200).send(sortedWithRank);
-            } catch (e) {
-                return res.status(500).send(`Api error: ${e}`);
             }
+            const sortedByViews = Object.entries(articleSums).sort(ArticlesService.sortArticles);
+            const sortedWithRank = ArticlesService.addRank(sortedByViews);
+            return res.status(200).send(sortedWithRank);
+        } catch (e) {
+            return res.status(500).send(`Api error: ${e}`);
         }
     },
     getTopMonthlyArticles: async (req, res) => {
