@@ -7,10 +7,10 @@ export const ArticlesController = {
     getTopWeeklyArticles: async (req, res) => {
         const { start } = req.params;
         const urls = [];
-        let url = `${WIKIMEDIA_PAGEVIEWS_URL}/top/en.wikipedia/all-access`;
         let timestamp = Number(start);
         let days = 7;
         while (days) {
+            let url = `${WIKIMEDIA_PAGEVIEWS_URL}/top/en.wikipedia/all-access`;
             let { year, month, day } = ArticlesService.convertTimestampToDate(timestamp);
             // add one to month because it is zero-based
             month += 1;
