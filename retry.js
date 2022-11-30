@@ -11,9 +11,10 @@ export const Retry = {
                 setTimeout(() => {
                     return Retry.getURL(url, retries - 1, backoff * 2)
                 }, backoff)
+            } else {
+                console.log(`There was an error making the request: ${e}`);
+                return e;
             }
-            console.log(`There was an error making the request: ${e}`);
-            return e;
         }
     }
 };
